@@ -1,0 +1,1 @@
+PASS: fingerprint.py == digest.py on 20 random signals; 17b/20ms (16 bits/frame, 800 bps)

@@ -1,0 +1,132 @@
+{
+  "honest_path": {
+    "valid": true,
+    "s_cred": 1.0,
+    "checks": {
+      "challenge_fresh": true,
+      "challenge_bound": true,
+      "domain_bound": true,
+      "holder_signature": true,
+      "subject_binding": true,
+      "issuer_signature": true,
+      "issuer_expected": true,
+      "issuer_anchored": true,
+      "not_expired": true,
+      "revocation_checked": true,
+      "not_revoked": true
+    },
+    "reason": "all checks passed",
+    "latency_ms": 0.6783339995308779
+  },
+  "attacks": {
+    "no_credential": {
+      "valid": false,
+      "s_cred": 0.0,
+      "checks": {
+        "challenge_fresh": true,
+        "challenge_bound": true,
+        "domain_bound": true,
+        "holder_signature": false
+      },
+      "reason": "holder signature invalid: InvalidSignature",
+      "latency_ms": 0.27587499789660797
+    },
+    "self_signed_issuer": {
+      "valid": false,
+      "s_cred": 0.0,
+      "checks": {
+        "challenge_fresh": true,
+        "challenge_bound": true,
+        "domain_bound": true,
+        "holder_signature": true,
+        "subject_binding": true,
+        "issuer_signature": true,
+        "issuer_expected": false
+      },
+      "reason": "credential issued by a different organisation than the one claimed",
+      "latency_ms": 0.5932079984631855
+    },
+    "stolen_credential": {
+      "valid": false,
+      "s_cred": 0.0,
+      "checks": {
+        "challenge_fresh": true,
+        "challenge_bound": true,
+        "domain_bound": true,
+        "holder_signature": true,
+        "subject_binding": false
+      },
+      "reason": "presenter is not the credential subject",
+      "latency_ms": 0.30583300031139515
+    },
+    "replayed_presentation": {
+      "valid": false,
+      "s_cred": 0.0,
+      "checks": {
+        "challenge_fresh": true,
+        "challenge_bound": false,
+        "domain_bound": true
+      },
+      "reason": "presentation not bound to this challenge and domain",
+      "latency_ms": 0.000957999873207882
+    },
+    "tampered_claim": {
+      "valid": false,
+      "s_cred": 0.0,
+      "checks": {
+        "challenge_fresh": true,
+        "challenge_bound": true,
+        "domain_bound": true,
+        "holder_signature": true,
+        "subject_binding": true,
+        "issuer_signature": false
+      },
+      "reason": "issuer signature invalid: InvalidSignature",
+      "latency_ms": 0.5914590001339093
+    },
+    "revoked_credential": {
+      "valid": false,
+      "s_cred": 0.0,
+      "checks": {
+        "challenge_fresh": true,
+        "challenge_bound": true,
+        "domain_bound": true,
+        "holder_signature": true,
+        "subject_binding": true,
+        "issuer_signature": true,
+        "issuer_expected": true,
+        "issuer_anchored": true,
+        "not_expired": true,
+        "revocation_checked": true,
+        "not_revoked": false
+      },
+      "reason": "credential revoked",
+      "latency_ms": 0.5919169998378493
+    },
+    "expired_credential": {
+      "valid": false,
+      "s_cred": 0.2,
+      "checks": {
+        "challenge_fresh": true,
+        "challenge_bound": true,
+        "domain_bound": true,
+        "holder_signature": true,
+        "subject_binding": true,
+        "issuer_signature": true,
+        "issuer_expected": true,
+        "issuer_anchored": true,
+        "not_expired": false
+      },
+      "reason": "credential expired",
+      "latency_ms": 0.5817500023113098
+    }
+  },
+  "latency": {
+    "n": 2000,
+    "median_ms": 0.5791250005131587,
+    "p95_ms": 0.6041312481102068,
+    "p99_ms": 0.6996260776577401,
+    "max_ms": 1.482333998865215
+  },
+  "all_attacks_blocked": true
+}

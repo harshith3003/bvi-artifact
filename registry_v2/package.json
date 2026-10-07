@@ -1,0 +1,14 @@
+{
+  "name": "bvi-registry-v2",
+  "version": "2.0.0",
+  "private": true,
+  "description": "BVIRegistry v2 (round 4): registered carriers, attester-keyed slots, organisation-keyed anchors, independent revocation principals",
+  "scripts": {
+    "test": "hardhat test",
+    "gas": "hardhat run scripts/gas_profile_v2.js"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.22.10"
+  }
+}

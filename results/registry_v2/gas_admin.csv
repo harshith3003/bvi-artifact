@@ -1,0 +1,9 @@
+operation,gas
+register (1 channel),121811
+addChannel,51867
+removeChannel,32223
+rotateKey,39468
+registerHop,72120
+setHopStatus (suspend),29888
+setStatus (suspend),32101
+setStatus (revoke),32070

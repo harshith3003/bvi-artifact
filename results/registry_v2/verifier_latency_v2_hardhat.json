@@ -1,0 +1,22 @@
+{
+  "contract": "BVIRegistry (final)",
+  "network": "hardhat",
+  "what": "live verify(): resolve + isAuthorisedChannel + getAttestations + hopOf x3 (trusted-attestor filter), sequential",
+  "case": "honest session, 3 attesting carriers; not pooled across attacks",
+  "runs": 2000,
+  "warmup": 50,
+  "median_ms": 1.3951,
+  "p95_ms": 1.5925,
+  "p99_ms": 2.5496,
+  "machine": {
+    "platform": "darwin 25.6.0",
+    "arch": "arm64",
+    "cpu": "Apple M5",
+    "cores": 10,
+    "memory_gb": 16
+  },
+  "runtime": {
+    "node": "24.14.1",
+    "ethers": "6.17.0"
+  }
+}

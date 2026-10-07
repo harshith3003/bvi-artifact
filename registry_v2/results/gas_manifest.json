@@ -1,0 +1,9 @@
+{
+  "contract": "BVIRegistry v2 (bvi_round4/contracts)",
+  "solc": "0.8.24, optimizer 200, paris",
+  "network": "hardhat",
+  "MAX_HOPS": 32,
+  "frames_per_second": 50,
+  "note": "receipt gasUsed incl. intrinsic and calldata; hardhat network is deterministic",
+  "generated": "2026-10-05T12:00:46.895Z"
+}

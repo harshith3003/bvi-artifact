@@ -1,0 +1,200 @@
+Compiled 2 Solidity files successfully (evm target: paris).
+
+
+  C3 - partial path control (silent carriers ignored)
+      C3a     L1=pass L2=pass L3=pass L4=live -> verified
+    ✔ C3a: 3 of 5 carriers attest and agree -> pass, verified (1052ms)
+      C3b     L1=pass L2=unknown L3=pass L4=live -> verified
+    ✔ C3b: only 1 carrier attests -> unknown, does not block
+      C3c     L1=pass L2=unknown L3=pass L4=live -> verified
+    ✔ C3c: no carrier attests -> unknown, does not block
+      C3d     L1=pass L2=fail L3=pass L4=live -> fail
+    ✔ C3d: rewrite with an honest participant on each side -> caught (fail)
+      C3e     L1=pass L2=pass L3=pass L4=live -> verified
+    ✔ C3e: honest participants only downstream -> missed, path passes on the rewritten ID
+      C3f     L1=pass L2=pass L3=pass L4=live -> verified
+    ✔ C3f: full collusion, all 5 attest the fake ID -> route check misses it (as in C2)
+      C3g-A   L1=pass L2=pass L3=pass L4=live -> verified
+      C3g-B   L1=pass L2=unknown L3=pass L4=live -> verified
+    ✔ C3g: a colluder is worth the same as a non-participant for detection
+      C3h     L1=fail L2=pass L3=pass L4=live -> fail
+    ✔ C3h: revoked originator -> Layer 1 fail even with a consistent path
+
+  G1 - the protocol has no field for a score; Layer 4 can only demote
+    ✔ G1a: no writable function, parameter or event field is designated for a score
+    ✔ G1b: a 'score' written into an existing on-chain field does not change the verdict
+    ✔ G1c: exhaustive - Layer 4 never promotes, never touches a crypto fail, never itself yields 'fail'
+
+  G2 - deepfake with a fully valid on-chain record
+      G2a     L1=pass L2=pass L3=pass L4=synthetic -> not verified
+    ✔ G2a: valid credential + consistent path + matching digest + synthetic voice -> 'not verified'
+    ✔ G2b: four cases - exactly one verified; only the digest mismatch gives 'fail'
+
+  Path rule (paper Layer 2, v2)
+    ✔ pathStatus: one vote per carrier; <2 unknown; chained agree pass; break or unroled change fail
+
+  CLAIM 2 - per-session anchor cost does not depend on call length or hop count
+      30 combinations: execution gas 120263 in every case; total 143655-143679 (spread 24, calldata only)
+    ✔ execution gas is identical across a duration x hop-count grid; totals differ only by calldata (174656ms)
+
+  CLAIM (R2, R9) - every call-time interaction is a gasless read
+    ✔ all verification entry points are declared view in the ABI
+    ✔ a zero-balance account with no transaction history can run the full verifier
+
+  CLAIM (Section 5.1) - channel membership is one storage read
+      isAuthorisedChannel execution gas: 2631 (1 channel), 2631 (16 channels)
+    ✔ membership test cost does not grow with the channel set size
+    ✔ a negative membership test costs the same as a positive one
+
+  CLAIM (Section 7.1) - anchors are non-repudiable
+    ✔ an anchor cannot be overwritten, even by the organisation that wrote it
+    ✔ the anchor timestamp comes from consensus, not from a party (R7)
+
+  P1 - attestation slot squatting fails
+    ✔ an unregistered key cannot attest, and nothing is written
+    ✔ slots are keyed by attester: an earlier writer at the same hop cannot lock out an honest carrier
+    ✔ a carrier attests at most once per session, even with a second key
+    ✔ suspended and revoked carriers cannot attest
+
+  P2 - anchor squatting fails
+    ✔ nobody but the organisation's controller can anchor under its DID
+    ✔ an attacker's own organisation anchoring the same sid does not block the victim
+    ✔ a suspended or revoked organisation cannot anchor
+    ✔ an anchor is write-once, even for the organisation
+
+  P3 - unauthorised writes are rejected before touching storage
+    ✔ every unauthorised write reverts and leaves all state unchanged
+
+  C4 - attestation griefing (rerun on BVIRegistry v2)
+    ✔ a carrier cannot attest under another carrier's identity
+    ✔ out-of-range hops and empty claims are rejected
+    ✔ griefing attempts do not change an honest session's verdict
+
+  X4 - anchors are keyed by (did, sid, chainid)
+    ✔ the key commits to the chain id, so a record cannot be replayed as another chain's
+    ✔ the key commits to the organisation, so the same sid under another DID is a different anchor
+
+  C6 - anchor front-running fails
+    ✔ an observer of a pending anchor cannot write it first
+
+  D2 - spam is rejected without storage and per-session storage is bounded
+    ✔ unregistered spam writes nothing and does not affect an honest session
+    ✔ at most MAX_HOPS attestations can be stored per session (310ms)
+
+  T2 - translator role (on chain and in the verifier)
+    ✔ a carrier WITH the translator role declares a change and the route passes
+    ✔ a carrier WITHOUT the role that declares a change makes the route fail
+    ✔ the trusted-attestor filter (on by default) ignores a carrier revoked after it attested
+
+  (a) two independent principals can revoke
+    ✔ the organisation's controller can revoke without the registrar
+    ✔ the registrar can revoke without the controller
+    ✔ the registrar cannot be made an organisation's controller
+    ✔ only the organisation can rotate its key; the registrar cannot
+    ✔ nobody outside the two principals can revoke
+    ✔ a captured or negligent registrar cannot block the organisation revoking itself
+
+  (b) revocation is terminal and cannot be undone
+    ✔ neither principal can return a revoked DID to Active
+    ✔ a revoked DID cannot be moved to Suspended either
+    ✔ a revoked DID cannot be re-registered to clear its history
+    ✔ rotating the key of a revoked organisation does not revive it
+
+  (c) the effect is immediate
+    ✔ a revocation is visible to a reader in the same block
+    ✔ no settlement or challenge window exists in the contract
+
+  (d) the effect is observable without polling
+    ✔ StatusChanged carries both the old and new status
+    ✔ StatusChanged indexes the DID so a client can filter server-side
+    ✔ a client filtering on one DID does not see another organisation's events
+
+  status transitions - remaining state machine
+    ✔ Suspended is reversible by either principal
+    ✔ a no-op transition reverts rather than emitting a misleading event
+    ✔ a DID cannot be pushed back to Unregistered
+    ✔ an unknown DID resolves to Unregistered rather than reverting
+
+  R1 - a stripped or failing stream is 'not verified'
+    ✔ stream stripped (no key message): not verified, even with a perfect credential and path
+    ✔ any failing block tag: not verified (not 'fail')
+    ✔ authenticated stream: window above threshold -> fail; below -> pass; no conclusive window -> unknown
+
+  R2 - the anchor belongs to the after-call audit, not the live verdict
+    ✔ a wrong ptr does not change the live verdict; the audit reports it
+    ✔ the audit reports a correct ptr and a root mismatch independently
+    ✔ before teardown there is no anchor, and the live verdict does not need one
+
+  R3 - content threshold from the codecs declared on the path
+    ✔ codec declarations are stored on chain with the attestation
+    ✔ every hop attests, nobody transcodes -> the origin codec's threshold
+    ✔ a transcoder declares AMR-NB 4.75 -> the worst declared codec's threshold
+    ✔ a hop that did not attest could have transcoded -> pooled threshold
+    ✔ origin codec not declared, or path length unknown -> pooled threshold
+
+  A1 - identifier spoofing
+    ✔ an unregistered DID resolves to Unregistered and fails Layer 1
+    ✔ an unregistered party cannot write attestations or anchors at all
+
+  A2 - forged issuer
+    ✔ a key not matching the on-chain hash fails verification
+    ✔ an attacker cannot issue (register) a credential
+    ✔ a registered organisation cannot claim another organisation's number
+
+  A3 - credential theft
+    ✔ revocation terminates a stolen credential immediately
+    ✔ the thief cannot undo the revocation
+    ✔ THE STATED GAP: sessions anchored before revocation still verify, inside a provable window
+
+  A4 - assertion replay
+    ✔ session binding: an anchor for one sid has no effect on another
+    ✔ an attestation is bound to its session and cannot be transplanted
+    ✔ the same nonce with a different channel yields a different session
+
+  A5 - credential tampering
+    ✔ the on-chain key hash cannot be altered by anyone but the organisation
+    ✔ nobody can add a channel to an organisation except the registrar
+
+  A6 - revoked credential use
+    ✔ a revoked credential fails Layer 1 in the same block
+    ✔ revocation is observable without polling
+
+  A7 - expired credential use
+    ✔ key rotation advances the epoch so an assertion under the old key is identifiable
+    ✔ a suspended credential fails Layer 1 and is reversible
+
+  A8 - in-path identifier rewriting
+    ✔ a rewrite between two attesting carriers is an undeclared change -> fail
+    ✔ a rewrite with only one attesting carrier yields unknown, not failure
+    ✔ attestations are attributable to a registered carrier and key
+
+  A9 - in-transit media substitution
+    ✔ the digest root is bound to (did, sid) and immutable once written
+    ✔ audio never reaches the chain - anchorSession takes only fixed-width values
+    ✔ a substituted stream fails the live content check
+
+  A10 - credential-valid synthesis
+    ✔ the protocol has no field for a score: no write function or parameter is designated for one
+    ✔ the anchor record has no field a detector could populate
+    ✔ a credential-valid synthetic call is demoted to 'not verified' by Layer 4 only
+
+  A11 - live human under a valid credential
+    ✔ STATED LIMITATION: a live human using a valid credential is verified
+
+  coverage table check (Table II)
+      A1   identifier spoofing                     2 tests  -> Layer 1
+      A2   forged issuer                           3 tests  -> Layer 1
+      A3   credential theft                        3 tests  -> Layer 1 + revocation (window stated)
+      A4   assertion replay                        3 tests  -> Layer 3 session binding
+      A5   credential tampering                    2 tests  -> Layer 1
+      A6   revoked credential use                  2 tests  -> Layer 1
+      A7   expired credential use                  2 tests  -> Layer 1
+      A8   in-path identifier rewriting            3 tests  -> Layer 2 (unknown when unobserved)
+      A9   in-transit media substitution           3 tests  -> Layer 3 digest
+      A10  credential-valid synthesis              3 tests  -> Layer 4 (demote only)
+      A11  live human under a valid credential     1 tests  -> not defended (stated limitation)
+    ✔ every Table II row has exactly one block, in table order, and all its tests passed
+
+
+  99 passing (3m)
+

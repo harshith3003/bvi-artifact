@@ -1,0 +1,31 @@
+
+
+  T1 — declared translations (route check, item 3)
+    ✔ T1a: no translation, 3 participants agree -> pass
+    ✔ T1b: participating carrier translates and DECLARES it -> pass (old rule would fail)
+    ✔ T1c: NON-participating carrier translates between two participants -> fail (residual false flag)
+    ✔ T1d: undeclared rewrite by an in-path attacker between participants -> fail
+    ✔ T1e: translation AND attack on the same path -> fail at the undeclared change only
+    ✔ T1f: participating malicious carrier DECLARES a rewrite -> pass, but attributable (policy question)
+    ✔ T1g: fewer than 2 participants -> unknown, whatever was translated
+
+
+  7 passing (18ms)
+
+·············································································································
+|  [32m[1mSolidity and Network Configuration[22m[39m                                                                       │
+························|·················|···············|··················|·······························
+|  [36mSolidity: 0.8.24[39m     ·  [36mOptim: true[39m    ·  [36mRuns: 200[39m    ·  [36mviaIR: false[39m    ·    [36mBlock: 60,000,000 gas[39m     │
+························|·················|···············|··················|·······························
+|  [32m[1mMethods[22m[39m                                                                                                  │
+························|·················|···············|··················|··············|················
+|  [32m[1mContracts / Methods[22m[39m  ·  [1mMin[22m            ·  [1mMax[22m          ·  [1mAvg[22m             ·  [1m# calls[22m     ·  [1musd (avg)[22m    │
+························|·················|···············|··················|··············|················
+|  [32m[1mKey[22m[39m                                                                                                      │
+·············································································································
+|  [35m[1m◯[22m[39m  Execution gas for this method does not include intrinsic gas overhead                                 │
+·············································································································
+|  [35m[1m△[22m[39m  Cost was non-zero but below the precision setting for the currency display (see options)              │
+·············································································································
+|  [35mToolchain:[39m  hardhat                                                                                      │
+·············································································································

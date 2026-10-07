@@ -1,0 +1,24 @@
+SIP TESTBED — call setup delay (INVITE -> 200 OK at the caller), 3 Kamailio hops, local chain
+  BVI off : n= 100  median    1.05 ms   p95    1.22 ms
+  BVI on  : n= 100  median   48.78 ms   p95   54.19 ms
+  added   : median   47.73 ms [bootstrap 95% 47.38-48.24]   p95   52.97 ms
+
+  breakdown of the added delay (BVI-on calls):
+    recipient verification (L1 + route check, JSON-RPC reads): median 8.46 ms, p95 10.09 ms
+    hop 0 on-chain attestation (synchronous, automine):     median 11.50 ms, p95 14.00 ms
+    hop 1 on-chain attestation (synchronous, automine):     median 11.00 ms, p95 13.00 ms
+    hop 2 on-chain attestation (synchronous, automine):     median 11.00 ms, p95 13.00 ms
+
+ATTACK SCENARIOS (10 s of LibriSpeech dev-clean speech, G.711 mu-law; verdict by the callee)
+  scenario     n  outcomes                     L1     route   content       max window BER   expected
+  honest       5  verified 5                   pass   pass    pass          0.101-0.134      verified OK
+  rewrite      5  fail 5                       pass   fail    pass          0.071-0.157      fail OK
+  substitute   5  fail 5                       pass   pass    fail          0.572-0.776      fail OK
+  splice3s     5  fail 5                       pass   pass    fail          0.530-0.668      fail OK
+  strip        5  not verified 5               pass   pass    unverifiable  -                not verified OK
+  content threshold used: 0.215 (worst declared codec: g711u)
+  content threshold used: 0.455 (pooled: hop 1 did not attest and could have transcoded)
+
+Notes: local chain with instant mining; attestations are written synchronously before each proxy
+forwards the INVITE. On a live rollup a write takes a block, so attestation must run asynchronously and
+the route check during ringing; the verification read cost above is unaffected by that.

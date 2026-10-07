@@ -1,0 +1,8 @@
+Environment used for the results in this repository
+OS: macOS 26.6.2 (arm64)
+CPU: Apple M5, memory 16 GB
+Python: Python 3.12.10
+Node: v24.14.1
+ffmpeg: ffmpeg version 9.0.2 Copyright (c) 2000-2026 the FFmpeg developers
+Docker: Docker version 29.8.1, build 4a63305
+Python packages: see requirements.txt; Node packages: registry_v2/package-lock.json

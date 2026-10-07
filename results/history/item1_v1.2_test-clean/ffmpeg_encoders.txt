@@ -1,0 +1,7 @@
+ A....D libopencore_amrnb    OpenCORE AMR-NB (Adaptive Multi-Rate Narrow-Band) (codec amr_nb)
+ A..X.D opus                 Opus
+ A....D libopus              libopus Opus (codec opus)
+ A....D pcm_alaw             PCM A-law / G.711 A-law
+ A..... pcm_alaw_at          pcm_alaw (AudioToolbox) (codec pcm_alaw)
+ A....D pcm_mulaw            PCM mu-law / G.711 mu-law
+ A..... pcm_mulaw_at         pcm_mulaw (AudioToolbox) (codec pcm_mulaw)

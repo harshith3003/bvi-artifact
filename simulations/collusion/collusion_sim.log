@@ -1,0 +1,16 @@
+seed=20260909  trials/cell=200000  cells=80
+max |closed - MC| average case = 0.0026
+max |closed - MC| strategic    = 0.0021
+
+Detection, average case (closed form), p = 1.0:
+   H |  f=0.00  f=0.25  f=0.50  f=0.75  f=1.00
+   3 |   1.000   0.703   0.375   0.109   0.000
+   5 |   1.000   0.835   0.562   0.212   0.000
+   8 |   1.000   0.905   0.720   0.357   0.000
+  12 |   1.000   0.939   0.819   0.509   0.000
+
+Full collusion (f = 1), H = 5:
+  silent  : caught 0.000  missed->pass 0.000  missed->unknown 1.000
+  rational: caught 0.000  missed->pass 1.000  missed->unknown 0.000
+
+wrote collusion_detection.csv, collusion_outcomes.csv, collusion_manifest.json, collusion_detection.png

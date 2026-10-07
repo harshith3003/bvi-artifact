@@ -1,0 +1,11 @@
+  PASS  D0 keccak256 matches Ethereum test vectors
+  PASS  D1 honest call: recipient recovers k_c and every block tag verifies
+  PASS  D2 path adversary alters digest bits in one block -> only that block fails
+  PASS  D3 path adversary substitutes audio AND its own digests under its own key -> rejected
+  PASS  D4 path adversary swaps the recipient's epk_R for its own to learn k_c -> rejected
+  PASS  D5 key message replayed into another session -> rejected
+  PASS  D6 block tags from one session do not verify in another
+  PASS  D7 bandwidth: 850 + 64 bit/s fits the 1,600 bit/s RTP header-extension budget
+
+  key setup + open (both ends, incl. pure-Python keccak): 0.63 ms per call (200 runs)
+  tag per 1 s block: 11.1 us

@@ -1,0 +1,5 @@
+audio: real speech (~/bvi_audio_data/LibriSpeech/dev-clean); channel: G.711 mu-law + 1% loss; threshold 0.3
+  honest call                         -> pass
+  3 s injected into pause, current rule -> fail  (max window BER 1.000)
+  3 s injected into pause, old v1 rule  -> pass  (max conclusive window BER 0.112)
+RESULT: PASS

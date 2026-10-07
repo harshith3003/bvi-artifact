@@ -1,0 +1,67 @@
+{
+  "T_L2_seconds": 43200.0,
+  "T_L1_finality_seconds": 768.0,
+  "T_L1_block_seconds": 12.0,
+  "sources": {
+    "sequencing_window": "OP Stack Specification, Configurability: 3,600 L1 blocks (12 h at 12 s)",
+    "finality": "Ethereum PoS: finalisation after 2 epochs of 32 slots x 12 s"
+  },
+  "rows": [
+    {
+      "detection_delay_h": 0,
+      "exposure_L1_final_h": 0.21333333333333335,
+      "exposure_L2_worst_h": 12.0,
+      "ratio_vs_L1_finality": 56.25,
+      "ratio_vs_L1_one_block": 3600.0
+    },
+    {
+      "detection_delay_h": 0.25,
+      "exposure_L1_final_h": 0.4633333333333333,
+      "exposure_L2_worst_h": 12.25,
+      "ratio_vs_L1_finality": 26.43884892086331,
+      "ratio_vs_L1_one_block": 48.35526315789474
+    },
+    {
+      "detection_delay_h": 1,
+      "exposure_L1_final_h": 1.2133333333333334,
+      "exposure_L2_worst_h": 13.0,
+      "ratio_vs_L1_finality": 10.714285714285714,
+      "ratio_vs_L1_one_block": 12.956810631229235
+    },
+    {
+      "detection_delay_h": 6,
+      "exposure_L1_final_h": 6.213333333333333,
+      "exposure_L2_worst_h": 18.0,
+      "ratio_vs_L1_finality": 2.8969957081545066,
+      "ratio_vs_L1_one_block": 2.9983342587451416
+    },
+    {
+      "detection_delay_h": 12,
+      "exposure_L1_final_h": 12.213333333333333,
+      "exposure_L2_worst_h": 24.0,
+      "ratio_vs_L1_finality": 1.965065502183406,
+      "ratio_vs_L1_one_block": 1.999444598722577
+    },
+    {
+      "detection_delay_h": 24,
+      "exposure_L1_final_h": 24.213333333333335,
+      "exposure_L2_worst_h": 36.0,
+      "ratio_vs_L1_finality": 1.486784140969163,
+      "ratio_vs_L1_one_block": 1.4997916955978337
+    },
+    {
+      "detection_delay_h": 48,
+      "exposure_L1_final_h": 48.21333333333333,
+      "exposure_L2_worst_h": 60.0,
+      "ratio_vs_L1_finality": 1.2444690265486726,
+      "ratio_vs_L1_one_block": 1.2499132004721893
+    },
+    {
+      "detection_delay_h": 72,
+      "exposure_L1_final_h": 72.21333333333334,
+      "exposure_L2_worst_h": 84.0,
+      "ratio_vs_L1_finality": 1.1632200886262924,
+      "ratio_vs_L1_one_block": 1.1666126568214434
+    }
+  ]
+}

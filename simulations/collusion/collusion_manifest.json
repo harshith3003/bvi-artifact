@@ -1,0 +1,130 @@
+{
+  "script": "revision/sim/collusion_sim.py",
+  "seed": 20260909,
+  "trials_per_cell": 200000,
+  "grid": {
+    "H": [
+      3,
+      5,
+      8,
+      12
+    ],
+    "p": [
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "f": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ]
+  },
+  "rng": "numpy.random.default_rng (PCG64)",
+  "numpy_version": "2.5.3",
+  "python_version": "3.12.10",
+  "max_absdiff_average_case": 0.002635000000000054,
+  "max_absdiff_strategic": 0.002145000000000008,
+  "model": "caught iff >=1 honest participant on each side of the rewrite boundary; q = p(1-f)",
+  "equivalence_examples": [
+    {
+      "H": 3,
+      "p": 1.0,
+      "f": 0.5,
+      "q": 0.5,
+      "collusion_closed": 0.375,
+      "nonparticipation_closed": 0.375
+    },
+    {
+      "H": 3,
+      "p": 0.5,
+      "f": 0.5,
+      "q": 0.25,
+      "collusion_closed": 0.109375,
+      "nonparticipation_closed": 0.109375
+    },
+    {
+      "H": 3,
+      "p": 1.0,
+      "f": 0.25,
+      "q": 0.75,
+      "collusion_closed": 0.703125,
+      "nonparticipation_closed": 0.703125
+    },
+    {
+      "H": 5,
+      "p": 1.0,
+      "f": 0.5,
+      "q": 0.5,
+      "collusion_closed": 0.5625,
+      "nonparticipation_closed": 0.5625
+    },
+    {
+      "H": 5,
+      "p": 0.5,
+      "f": 0.5,
+      "q": 0.25,
+      "collusion_closed": 0.2119140625,
+      "nonparticipation_closed": 0.2119140625
+    },
+    {
+      "H": 5,
+      "p": 1.0,
+      "f": 0.25,
+      "q": 0.75,
+      "collusion_closed": 0.8349609375,
+      "nonparticipation_closed": 0.8349609375
+    },
+    {
+      "H": 8,
+      "p": 1.0,
+      "f": 0.5,
+      "q": 0.5,
+      "collusion_closed": 0.7204241071428571,
+      "nonparticipation_closed": 0.7204241071428571
+    },
+    {
+      "H": 8,
+      "p": 0.5,
+      "f": 0.5,
+      "q": 0.25,
+      "collusion_closed": 0.3573848179408482,
+      "nonparticipation_closed": 0.3573848179408482
+    },
+    {
+      "H": 8,
+      "p": 1.0,
+      "f": 0.25,
+      "q": 0.75,
+      "collusion_closed": 0.9047829764229911,
+      "nonparticipation_closed": 0.9047829764229911
+    },
+    {
+      "H": 12,
+      "p": 1.0,
+      "f": 0.5,
+      "q": 0.5,
+      "collusion_closed": 0.8185147372159091,
+      "nonparticipation_closed": 0.8185147372159091
+    },
+    {
+      "H": 12,
+      "p": 0.5,
+      "f": 0.5,
+      "q": 0.25,
+      "collusion_closed": 0.5092591534961354,
+      "nonparticipation_closed": 0.5092591534961354
+    },
+    {
+      "H": 12,
+      "p": 1.0,
+      "f": 0.25,
+      "q": 0.75,
+      "collusion_closed": 0.9393940134481951,
+      "nonparticipation_closed": 0.9393940134481951
+    }
+  ]
+}

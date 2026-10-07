@@ -1,0 +1,73 @@
+Probing codecs ...
+  g711u          OK
+  g711a          OK
+  opus16         OK
+  amr122         OK
+  amr475         OK
+  amr122_g711u   OK
+Building calls ...
+  speaker 1089: 3 call(s)
+  speaker 1188: 3 call(s)
+  speaker 121: 3 call(s)
+  speaker 1221: 3 call(s)
+  speaker 1284: 3 call(s)
+  speaker 1320: 3 call(s)
+  speaker 1580: 3 call(s)
+  speaker 1995: 3 call(s)
+  speaker 2094: 3 call(s)
+  speaker 2300: 3 call(s)
+  speaker 237: 3 call(s)
+  speaker 260: 3 call(s)
+  speaker 2830: 3 call(s)
+  speaker 2961: 3 call(s)
+  speaker 3570: 3 call(s)
+  speaker 3575: 3 call(s)
+  speaker 3729: 3 call(s)
+  speaker 4077: 3 call(s)
+  speaker 4446: 3 call(s)
+  speaker 4507: 3 call(s)
+  speaker 4970: 3 call(s)
+  speaker 4992: 3 call(s)
+  speaker 5105: 3 call(s)
+  speaker 5142: 3 call(s)
+  speaker 5639: 3 call(s)
+  speaker 5683: 3 call(s)
+  speaker 61: 3 call(s)
+  speaker 672: 3 call(s)
+  speaker 6829: 3 call(s)
+  speaker 6930: 3 call(s)
+  speaker 7021: 3 call(s)
+  speaker 7127: 3 call(s)
+  speaker 7176: 3 call(s)
+  speaker 7729: 3 call(s)
+  speaker 8224: 3 call(s)
+  speaker 8230: 3 call(s)
+  speaker 8455: 3 call(s)
+  speaker 8463: 3 call(s)
+  speaker 8555: 3 call(s)
+  speaker 908: 3 call(s)
+  120 calls, 40 speakers: 60 calibration / 60 test calls
+Honest calls ...
+  threshold (99th pct of calibration per-call max window BER) = 0.7006
+Attacks ...
+
+Done in 1335.7 s. Threshold = 0.7006. Results in ../results/item1
+Shortest splice detected (>=95% | >=50%):
+  g711u          splice_natural    >5.0 | 3.0
+  g711u          splice_synthetic  >5.0 | 3.0
+  g711u          splice_synthetic_say >5.0 | 3.0
+  g711a          splice_natural    >5.0 | 3.0
+  g711a          splice_synthetic  >5.0 | 3.0
+  g711a          splice_synthetic_say >5.0 | 2.0
+  opus16         splice_natural    >5.0 | 3.0
+  opus16         splice_synthetic  >5.0 | 3.0
+  opus16         splice_synthetic_say >5.0 | 3.0
+  amr122         splice_natural    >5.0 | 5.0
+  amr122         splice_synthetic  >5.0 | 3.0
+  amr122         splice_synthetic_say >5.0 | 2.0
+  amr475         splice_natural    >5.0 | 3.0
+  amr475         splice_synthetic  >5.0 | 3.0
+  amr475         splice_synthetic_say >5.0 | 3.0
+  amr122_g711u   splice_natural    >5.0 | 3.0
+  amr122_g711u   splice_synthetic  >5.0 | 3.0
+  amr122_g711u   splice_synthetic_say >5.0 | 3.0

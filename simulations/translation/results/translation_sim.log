@@ -1,0 +1,21 @@
+seed=20260909 trials/cell=200000  max |exact - MC| = 0.0035
+
+Honest-call false-flag rate, t = 0.10 (declared | undeclared):
+   H |      p=0.25           p=0.50           p=0.75           p=0.90           p=1.00     
+   3 |  0.005 | 0.021    0.012 | 0.072    0.014 | 0.135    0.008 | 0.170    0.000 | 0.190  
+   5 |  0.034 | 0.077    0.069 | 0.202    0.058 | 0.293    0.028 | 0.327    0.000 | 0.344  
+   8 |  0.125 | 0.207    0.185 | 0.400    0.126 | 0.484    0.056 | 0.510    0.000 | 0.522  
+  12 |  0.287 | 0.405    0.333 | 0.603    0.210 | 0.662    0.094 | 0.678    0.000 | 0.686  
+
+Attack flag rate (declared scheme) vs translation-free closed form, H=5, p=0.75:
+  f=0.00 t=0.00: flagged 0.834  rewrite caught 0.834  closed form 0.835
+  f=0.00 t=0.10: flagged 0.839  rewrite caught 0.834  closed form 0.835
+  f=0.00 t=0.25: flagged 0.847  rewrite caught 0.836  closed form 0.835
+  f=0.25 t=0.00: flagged 0.641  rewrite caught 0.641  closed form 0.641
+  f=0.25 t=0.10: flagged 0.650  rewrite caught 0.640  closed form 0.641
+  f=0.25 t=0.25: flagged 0.665  rewrite caught 0.640  closed form 0.641
+  f=0.50 t=0.00: flagged 0.389  rewrite caught 0.389  closed form 0.389
+  f=0.50 t=0.10: flagged 0.399  rewrite caught 0.389  closed form 0.389
+  f=0.50 t=0.25: flagged 0.413  rewrite caught 0.388  closed form 0.389
+
+wrote translation_false_flag.csv, translation_attack_detection.csv, translation_manifest.json, translation_false_flag.png

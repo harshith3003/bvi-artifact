@@ -1,0 +1,34 @@
+ADMIN
+  register (1 channel)     121,811
+  addChannel               51,867
+  removeChannel            32,223
+  rotateKey                39,468
+  registerHop              72,120
+  setHopStatus (suspend)   29,888
+  setStatus (suspend)      32,101
+  setStatus (revoke)       32,070
+
+ANCHOR (anchorSession), 35 combinations of call length 30 s-30 min and |Q| 1-32
+  execution gas: 120,263 in every combination
+  total min 143,631  max 143,679  (spread 48, calldata bytes only)
+
+ATTEST by order within a session (1st, 2nd, 3rd, ... attestation)
+  #1: 211,232, #2: 194,144, #3: 194,144, #4: 194,144, #5: 194,144, #6: 194,144, #7: 194,144, #8: 194,144, #9: 194,144, #10: 194,144, #11: 194,144, #12: 194,144, #13: 194,144, #14: 194,144, #15: 194,144, #16: 194,144
+
+PER CALL = 1 anchor + 1 attestation per participating carrier (all participating)
+  H= 1: anchor 143,655 + attestations 211,244 = 354,899
+  H= 2: anchor 143,655 + attestations 405,400 = 549,055
+  H= 3: anchor 143,655 + attestations 599,556 = 743,211
+  H= 5: anchor 143,643 + attestations 987,808 = 1,131,451
+  H= 8: anchor 143,643 + attestations 1,570,240 = 1,713,883
+  H=12: anchor 143,655 + attestations 2,346,960 = 2,490,615
+
+BATCHING (anchorSessionBatch vs N separate anchorSession transactions)
+  N=  1: 143,667 -> 144,593 per anchor (-0.64% saved)
+  N=  5: 143,665 -> 123,422 per anchor (14.09% saved)
+  N= 10: 143,660 -> 120,776 per anchor (15.93% saved)
+  N= 25: 143,663 -> 119,192 per anchor (17.03% saved)
+  N= 50: 143,664 -> 118,669 per anchor (17.40% saved)
+  N=100: 143,663 -> 118,416 per anchor (17.57% saved)
+
+wrote results/gas_*.csv, gas_manifest.json, gas_summary.txt

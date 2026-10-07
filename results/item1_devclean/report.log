@@ -1,0 +1,79 @@
+spec bvi-fp-v1.2; seed 20260909; natural corpus dev-clean; 120 calls of 60 s, 40 speakers (60 calibration / 60 test calls, speaker-disjoint)
+synthetic: 390 ASVspoof 2019 LA eval spoofs from ~/bvi_audio_data/asvspoof_spoof_r5
+thresholds, pause rule ON : pooled 0.455; g711u 0.215, g711a 0.212, opus16 0.316, amr122 0.404, amr122_g711u 0.394, amr475 0.500
+thresholds, pause rule OFF: pooled 0.447; g711u 0.214, g711a 0.212, opus16 0.280, amr122 0.382, amr122_g711u 0.383, amr475 0.469
+
+=== pause rule ON (spec), PER-CODEC threshold ===
+codec                   theta  honest 60 s calls wrongly flagged [cluster bootstrap 95%]
+G.711 mu-law            0.215    1.5% [ 0.6- 2.4]  (8/540 call-conditions, 60 calls)
+G.711 A-law             0.212    1.3% [ 0.6- 2.2]  (7/540 call-conditions, 60 calls)
+Opus 16 kbit/s          0.316    5.6% [ 1.7-10.4]  (30/540 call-conditions, 60 calls)
+AMR-NB 12.2             0.404    6.3% [ 2.6-10.7]  (34/540 call-conditions, 60 calls)
+AMR-NB 12.2 -> G.711    0.394    5.9% [ 2.2-10.4]  (32/540 call-conditions, 60 calls)
+AMR-NB 4.75             0.500    6.5% [ 2.2-11.9]  (35/540 call-conditions, 60 calls)
+codec                   full nat  full ASV  pause 3s  spl0.5  spl1.0  spl2.0  spl3.0  spl5.0   >=95% | >=50%
+G.711 mu-law              100.0%    100.0%    100.0%   61.7%   99.2%   99.2%  100.0%  100.0%   1.0 s | 0.5 s
+G.711 A-law               100.0%    100.0%    100.0%   71.7%  100.0%  100.0%  100.0%  100.0%   1.0 s | 0.5 s
+Opus 16 kbit/s            100.0%    100.0%    100.0%   47.5%   99.2%  100.0%  100.0%  100.0%   1.0 s | 1.0 s
+AMR-NB 12.2               100.0%    100.0%    100.0%   35.8%   87.5%  100.0%  100.0%  100.0%   2.0 s | 1.0 s
+AMR-NB 12.2 -> G.711      100.0%    100.0%    100.0%   44.2%   93.3%  100.0%  100.0%  100.0%   2.0 s | 1.0 s
+AMR-NB 4.75               100.0%    100.0%    100.0%   30.0%   53.3%   92.5%   99.2%  100.0%   3.0 s | 1.0 s
+
+=== pause rule ON (spec), POOLED threshold ===
+codec                   theta  honest 60 s calls wrongly flagged [cluster bootstrap 95%]
+G.711 mu-law            0.455    0.0% [ 0.0- 0.0]  (0/540 call-conditions, 60 calls)
+G.711 A-law             0.455    0.2% [ 0.0- 0.6]  (1/540 call-conditions, 60 calls)
+Opus 16 kbit/s          0.455    2.8% [ 0.0- 6.7]  (15/540 call-conditions, 60 calls)
+AMR-NB 12.2             0.455    3.9% [ 0.9- 7.6]  (21/540 call-conditions, 60 calls)
+AMR-NB 12.2 -> G.711    0.455    4.3% [ 1.1- 8.1]  (23/540 call-conditions, 60 calls)
+AMR-NB 4.75             0.455   10.0% [ 4.3-17.0]  (54/540 call-conditions, 60 calls)
+codec                   full nat  full ASV  pause 3s  spl0.5  spl1.0  spl2.0  spl3.0  spl5.0   >=95% | >=50%
+G.711 mu-law              100.0%    100.0%    100.0%    8.3%   48.3%   99.2%  100.0%  100.0%   2.0 s | 2.0 s
+G.711 A-law               100.0%    100.0%     99.2%   16.7%   37.5%  100.0%  100.0%  100.0%   2.0 s | 2.0 s
+Opus 16 kbit/s            100.0%    100.0%    100.0%   15.8%   53.3%   99.2%  100.0%  100.0%   2.0 s | 1.0 s
+AMR-NB 12.2               100.0%    100.0%    100.0%   23.3%   65.8%  100.0%  100.0%  100.0%   2.0 s | 1.0 s
+AMR-NB 12.2 -> G.711      100.0%    100.0%    100.0%   22.5%   60.8%  100.0%  100.0%  100.0%   2.0 s | 1.0 s
+AMR-NB 4.75               100.0%    100.0%    100.0%   45.0%   83.3%  100.0%  100.0%  100.0%   2.0 s | 1.0 s
+
+=== pause rule OFF (analysis), PER-CODEC threshold ===
+codec                   theta  honest 60 s calls wrongly flagged [cluster bootstrap 95%]
+G.711 mu-law            0.214    1.5% [ 0.6- 2.6]  (8/540 call-conditions, 60 calls)
+G.711 A-law             0.212    1.1% [ 0.4- 2.0]  (6/540 call-conditions, 60 calls)
+Opus 16 kbit/s          0.280    0.4% [ 0.0- 0.9]  (2/540 call-conditions, 60 calls)
+AMR-NB 12.2             0.382    0.2% [ 0.0- 0.6]  (1/540 call-conditions, 60 calls)
+AMR-NB 12.2 -> G.711    0.383    0.6% [ 0.0- 1.3]  (3/540 call-conditions, 60 calls)
+AMR-NB 4.75             0.469    0.0% [ 0.0- 0.0]  (0/540 call-conditions, 60 calls)
+codec                   full nat  full ASV  pause 3s  spl0.5  spl1.0  spl2.0  spl3.0  spl5.0   >=95% | >=50%
+G.711 mu-law              100.0%    100.0%      0.0%   35.8%   69.2%   75.8%   93.3%   93.3%   >5 s | 1.0 s
+G.711 A-law               100.0%    100.0%      0.8%   34.2%   72.5%   81.7%   85.0%   96.7%   5.0 s | 1.0 s
+Opus 16 kbit/s            100.0%    100.0%      0.0%   35.0%   70.8%   77.5%   86.7%   91.7%   >5 s | 1.0 s
+AMR-NB 12.2               100.0%    100.0%      0.0%    6.7%   50.8%   81.7%   82.5%   91.7%   >5 s | 1.0 s
+AMR-NB 12.2 -> G.711      100.0%    100.0%      0.0%   15.8%   57.5%   80.8%   85.8%   89.2%   >5 s | 1.0 s
+AMR-NB 4.75               100.0%    100.0%      0.0%    1.7%   12.5%   72.5%   84.2%   90.8%   >5 s | 2.0 s
+
+=== pause rule OFF (analysis), POOLED threshold ===
+codec                   theta  honest 60 s calls wrongly flagged [cluster bootstrap 95%]
+G.711 mu-law            0.447    0.0% [ 0.0- 0.0]  (0/540 call-conditions, 60 calls)
+G.711 A-law             0.447    0.0% [ 0.0- 0.0]  (0/540 call-conditions, 60 calls)
+Opus 16 kbit/s          0.447    0.0% [ 0.0- 0.0]  (0/540 call-conditions, 60 calls)
+AMR-NB 12.2             0.447    0.0% [ 0.0- 0.0]  (0/540 call-conditions, 60 calls)
+AMR-NB 12.2 -> G.711    0.447    0.0% [ 0.0- 0.0]  (0/540 call-conditions, 60 calls)
+AMR-NB 4.75             0.447    2.6% [ 0.7- 5.4]  (14/540 call-conditions, 60 calls)
+codec                   full nat  full ASV  pause 3s  spl0.5  spl1.0  spl2.0  spl3.0  spl5.0   >=95% | >=50%
+G.711 mu-law              100.0%    100.0%      0.0%    0.0%    1.7%   63.3%   86.7%   90.0%   >5 s | 2.0 s
+G.711 A-law               100.0%    100.0%      0.0%    0.0%    2.5%   74.2%   75.8%   91.7%   >5 s | 2.0 s
+Opus 16 kbit/s            100.0%    100.0%      0.0%    0.0%    7.5%   70.0%   81.7%   90.8%   >5 s | 2.0 s
+AMR-NB 12.2               100.0%    100.0%      0.0%    0.0%    7.5%   77.5%   80.0%   85.8%   >5 s | 2.0 s
+AMR-NB 12.2 -> G.711      100.0%    100.0%      0.0%    0.0%   12.5%   73.3%   80.8%   85.0%   >5 s | 2.0 s
+AMR-NB 4.75               100.0%    100.0%      2.5%   10.0%   38.3%   78.3%   84.2%   92.5%   >5 s | 2.0 s
+
+=== requested: AMR-NB 4.75 and the pooled policy with the pause rule OFF (Wilson 95%) ===
+  AMR-NB 4.75, per-codec           theta 0.469  full natural 100.0% [94.0-100.0]  full ASVspoof 100.0% [94.0-100.0]  3 s splice  84.2% [76.6- 89.6]  pause inject   0.0% [ 0.0-  3.1]
+  G.711 mu-law, pooled             theta 0.447  full natural 100.0% [94.0-100.0]  full ASVspoof 100.0% [94.0-100.0]  3 s splice  86.7% [79.4- 91.6]  pause inject   0.0% [ 0.0-  3.1]
+  G.711 A-law, pooled              theta 0.447  full natural 100.0% [94.0-100.0]  full ASVspoof 100.0% [94.0-100.0]  3 s splice  75.8% [67.4- 82.6]  pause inject   0.0% [ 0.0-  3.1]
+  Opus 16 kbit/s, pooled           theta 0.447  full natural 100.0% [94.0-100.0]  full ASVspoof 100.0% [94.0-100.0]  3 s splice  81.7% [73.8- 87.6]  pause inject   0.0% [ 0.0-  3.1]
+  AMR-NB 12.2, pooled              theta 0.447  full natural 100.0% [94.0-100.0]  full ASVspoof 100.0% [94.0-100.0]  3 s splice  80.0% [72.0- 86.2]  pause inject   0.0% [ 0.0-  3.1]
+  AMR-NB 12.2 -> G.711, pooled     theta 0.447  full natural 100.0% [94.0-100.0]  full ASVspoof 100.0% [94.0-100.0]  3 s splice  80.8% [72.9- 86.9]  pause inject   0.0% [ 0.0-  3.1]
+  AMR-NB 4.75, pooled              theta 0.447  full natural 100.0% [94.0-100.0]  full ASVspoof 100.0% [94.0-100.0]  3 s splice  84.2% [76.6- 89.6]  pause inject   2.5% [ 0.9-  7.1]
+
+wrote ../results/item1_devclean/report.txt and thresholds.json

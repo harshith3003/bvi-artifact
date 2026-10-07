@@ -1,0 +1,13 @@
+codec,attack,shortest_L_detected_ge_95pct,shortest_L_detected_ge_50pct
+g711u,splice_natural,2.0,1.0
+g711u,splice_synthetic,2.0,2.0
+g711a,splice_natural,2.0,2.0
+g711a,splice_synthetic,2.0,2.0
+opus16,splice_natural,2.0,1.0
+opus16,splice_synthetic,2.0,1.0
+amr122,splice_natural,2.0,1.0
+amr122,splice_synthetic,2.0,1.0
+amr475,splice_natural,2.0,1.0
+amr475,splice_synthetic,2.0,1.0
+amr122_g711u,splice_natural,2.0,1.0
+amr122_g711u,splice_synthetic,2.0,1.0
