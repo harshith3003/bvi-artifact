@@ -1,0 +1,91 @@
+{
+  "mode": "empirical",
+  "trials": 1000,
+  "seed": 20260909,
+  "thresholds": {
+    "g711u": 0.21473780487804878,
+    "g711a": 0.2124839124839125,
+    "opus16": 0.3159114583333335,
+    "amr122": 0.4035986564009664,
+    "amr122_g711u": 0.3936435803037276,
+    "amr475": 0.49974702380952385,
+    "pooled": 0.45535714285714285
+  },
+  "configs": [
+    {
+      "name": "BVI-0",
+      "km": "v1",
+      "route": "positional",
+      "stream": "v1",
+      "codec": "carrier",
+      "route_decides": true,
+      "note": "original implementation"
+    },
+    {
+      "name": "BVI-R",
+      "km": "v2",
+      "route": "linked",
+      "stream": "v2",
+      "codec": "chain",
+      "route_decides": true,
+      "note": "fully corrected reference"
+    },
+    {
+      "name": "BVI-B (strict)",
+      "km": "v2",
+      "route": "none",
+      "stream": "v2",
+      "codec": "endpoint_strict",
+      "route_decides": false,
+      "note": "no carrier records; strict audio"
+    },
+    {
+      "name": "BVI-B (lenient)",
+      "km": "v2",
+      "route": "none",
+      "stream": "v2",
+      "codec": "endpoint_lenient",
+      "route_decides": false,
+      "note": "optional: lenient audio policy"
+    },
+    {
+      "name": "R - number binding",
+      "km": "v1",
+      "route": "linked",
+      "stream": "v2",
+      "codec": "chain",
+      "route_decides": true,
+      "note": "ablation 1: relay vulnerability"
+    },
+    {
+      "name": "R - linked chain",
+      "km": "v2",
+      "route": "positional",
+      "stream": "v2",
+      "codec": "carrier",
+      "route_decides": true,
+      "note": "ablation 2: original carrier-record rule"
+    },
+    {
+      "name": "R - auth. termination",
+      "km": "v2",
+      "route": "linked",
+      "stream": "v2_noterm",
+      "codec": "chain",
+      "route_decides": true,
+      "note": "ablation 3: truncation / premature verification"
+    },
+    {
+      "name": "R + endpoint strict",
+      "km": "v2",
+      "route": "linked",
+      "stream": "v2",
+      "codec": "endpoint_strict",
+      "route_decides": true,
+      "note": "ablation 4: security vs availability"
+    }
+  ],
+  "python": "3.12.3",
+  "platform": "Linux-6.18.44-fc-v180-x86_64-with-glibc2.39",
+  "seconds": 122.9
+}

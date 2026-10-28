@@ -64,6 +64,14 @@ interface IBVIRegistry {
         uint64 blockTime;
     }
 
+    /// Round 6 (BVI-R): the neighbours a carrier observed for this session. prevCarrier is the carrierId the
+    /// call came from (keccak256("ORIGIN") for the first hop); nextCarrier is the carrierId it was sent to
+    /// (keccak256("RECIPIENT") for the terminating carrier).
+    struct Links {
+        bytes32 prevCarrier;
+        bytes32 nextCarrier;
+    }
+
     struct AnchorInput {
         bytes32 sid;
         bytes32 root;
@@ -81,6 +89,7 @@ interface IBVIRegistry {
     event HopStatusChanged(address indexed hopKey, Status oldStatus, Status newStatus);
     event Attested(bytes32 indexed sid, uint8 indexed hop, address indexed attestor,
                    bytes32 carrierId, bytes32 inClaim, bytes32 outClaim, uint8 codec);
+    event LinksDeclared(bytes32 indexed sid, bytes32 indexed carrierId, bytes32 prevCarrier, bytes32 nextCarrier);
     event SessionAnchored(bytes32 indexed did, bytes32 indexed sid, bytes32 root, bytes32 ptr,
                           uint32 frames, uint8 hops);
 
@@ -95,6 +104,8 @@ interface IBVIRegistry {
     function registerHop(bytes32 carrierId, address hopKey, string calldata metaURI, bool translator) external;
     function setHopStatus(address hopKey, Status newStatus) external;
     function attest(bytes32 sid, uint8 hop, bytes32 inClaim, bytes32 outClaim, uint8 codec) external;
+    function attestLinked(bytes32 sid, uint8 hop, bytes32 inClaim, bytes32 outClaim, uint8 codec,
+                          Links calldata links) external;
 
     // anchors (Layer 3)
     function anchorSession(bytes32 did, bytes32 sid, bytes32 root, bytes32 ptr, uint32 frames, uint8 hops) external;
@@ -107,6 +118,7 @@ interface IBVIRegistry {
     function hopOf(address hopKey) external view returns (Hop memory);
     function getAttestations(bytes32 sid) external view returns (Attestation[] memory);
     function attestationCount(bytes32 sid) external view returns (uint256);
+    function getLinks(bytes32 sid, address attester) external view returns (Links memory);
     function getAnchor(bytes32 did, bytes32 sid) external view returns (Anchor memory);
     function anchorKey(bytes32 did, bytes32 sid) external view returns (bytes32);
 }

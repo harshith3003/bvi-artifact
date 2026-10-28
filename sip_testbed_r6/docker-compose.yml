@@ -1,0 +1,25 @@
+# Round-6 BVI SIP testbed: caller -> p1 -> p2 -> p3 -> callee (Kamailio), media through a carrier relay that can
+# transcode (real FFmpeg codecs), drop, truncate or substitute; local chain with BVIRegistry incl. attestLinked.
+name: bvi_r6
+x-proxy: &proxy
+  build: { context: .., dockerfile: sip_testbed_r6/kamailio/Dockerfile }
+  depends_on: { bvi: { condition: service_healthy } }
+x-py: &py
+  build: { context: .., dockerfile: sip_testbed_r6/py/Dockerfile }
+  volumes:
+    - ${BVI_AUDIO:-~/bvi_audio_data}:/data:ro
+    - ./results:/results
+
+services:
+  bvi:
+    build: { context: .., dockerfile: sip_testbed_r6/bvi/Dockerfile }
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:8080/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 3s
+      retries: 100
+  p1: { <<: *proxy, environment: { HOP: "0", NAME: p1, NEXT: p2, ATTEST: "1", MALICIOUS: "0" } }
+  p2: { <<: *proxy, environment: { HOP: "1", NAME: p2, NEXT: p3, ATTEST: "1", MALICIOUS: "1", REWRITE_TO: "+61312340000" } }
+  p3: { <<: *proxy, environment: { HOP: "2", NAME: p3, NEXT: callee, ATTEST: "1", MALICIOUS: "0" } }
+  relay:  { <<: *py, command: ["python3", "relay_r6.py"] }
+  callee: { <<: *py, command: ["python3", "callee_r6.py"], depends_on: { bvi: { condition: service_healthy } } }
+  caller: { <<: *py, command: ["sleep", "infinity"], depends_on: [p1, p2, p3, relay, callee] }

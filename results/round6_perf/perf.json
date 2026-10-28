@@ -1,0 +1,61 @@
+{
+  "sender_fingerprint_60s": {
+    "median_ms": 12.538604089058936,
+    "p95_ms": 13.391154375858605,
+    "runs": 30
+  },
+  "recipient_check_60s": {
+    "median_ms": 13.80781247280538,
+    "p95_ms": 15.485758078284562,
+    "runs": 30
+  },
+  "recipient_check_peak_MB": 20.12596,
+  "key_message_v1": {
+    "median_ms": 0.6204369710758328,
+    "p95_ms": 0.6303792004473507,
+    "runs": 200
+  },
+  "key_message_v2": {
+    "median_ms": 0.6222089286893606,
+    "p95_ms": 0.6340353400446475,
+    "runs": 200
+  },
+  "stream_tag_v1_60s": {
+    "median_ms": 0.26772962883114815,
+    "p95_ms": 0.32016661716625094,
+    "runs": 100
+  },
+  "stream_tag_v2_60s": {
+    "median_ms": 0.28437504079192877,
+    "p95_ms": 0.38373753195628524,
+    "runs": 100
+  },
+  "stream_verify_v1_60s": {
+    "median_ms": 0.27400010731071234,
+    "p95_ms": 0.3001728793606162,
+    "runs": 100
+  },
+  "stream_verify_v2_60s": {
+    "median_ms": 0.279646017588675,
+    "p95_ms": 0.2904460416175425,
+    "runs": 100
+  },
+  "derived": {
+    "recipient_ms_per_audio_second_v2": 0.23479097483990094,
+    "real_time_factor": 0.00023479097483990093,
+    "concurrent_calls_per_core": 4259.107492022976,
+    "sender_ms_per_audio_second": 0.20897673481764892,
+    "stream_bits_per_s": {
+      "v1": 914,
+      "v2": 930
+    },
+    "termination_bytes_once": 16
+  },
+  "machine": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "processor": "arm",
+    "python": "3.12.10",
+    "numpy": "2.5.4",
+    "cpu_count": 10
+  }
+}

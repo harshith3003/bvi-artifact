@@ -64,6 +64,7 @@ contract BVIRegistry is IBVIRegistry {
     mapping(bytes32 sid => mapping(address attester => Attestation)) private _att;
     mapping(bytes32 sid => mapping(bytes32 carrierId => bool)) private _carrierAttested;
     mapping(bytes32 sid => address[]) private _attesters;
+    mapping(bytes32 sid => mapping(address attester => Links)) private _links;   // round 6 (BVI-R)
 
     mapping(bytes32 key => Anchor) private _anchors; // key = anchorKey(did, sid)
 
@@ -231,6 +232,52 @@ contract BVIRegistry is IBVIRegistry {
         emit Attested(sid, hop, msg.sender, h.carrierId, inClaim, outClaim, codec);
     }
 
+    /// Round 6 (BVI-R). Same checks and storage as attest(), plus the carrier's observed neighbours, so the
+    /// verifier can accept a record only when an attesting neighbour confirms it (linked-chain rule).
+    /// attest() is deliberately left byte-for-byte unchanged so the BVI-0 gas figures remain comparable.
+    function attestLinked(bytes32 sid, uint8 hop, bytes32 inClaim, bytes32 outClaim, uint8 codec,
+                          Links calldata links) external override {
+        if (links.prevCarrier == bytes32(0) || links.nextCarrier == bytes32(0)) revert ZeroCarrier();
+        Hop storage h = _checkAttest(sid, hop, inClaim, outClaim);
+        Attestation storage a = _att[sid][msg.sender];
+        a.attestor = msg.sender;
+        a.carrierId = h.carrierId;
+        a.inClaim = inClaim;
+        a.outClaim = outClaim;
+        a.blockTime = uint64(block.timestamp);
+        a.hop = hop;
+        a.translator = h.translator;
+        a.codec = codec;
+        Links storage l = _links[sid][msg.sender];
+        l.prevCarrier = links.prevCarrier;
+        l.nextCarrier = links.nextCarrier;
+        _carrierAttested[sid][h.carrierId] = true;
+        _attesters[sid].push(msg.sender);
+        _emitAttested(sid, hop, h.carrierId, inClaim, outClaim, codec);
+        emit LinksDeclared(sid, h.carrierId, links.prevCarrier, links.nextCarrier);
+    }
+
+    /// The checks of attest(), in the same order; every one runs before any storage is written.
+    function _checkAttest(bytes32 sid, uint8 hop, bytes32 inClaim, bytes32 outClaim)
+        private view returns (Hop storage h)
+    {
+        if (sid == bytes32(0)) revert ZeroSession();
+        if (hop >= MAX_HOPS) revert HopOutOfRange();
+        if (inClaim == bytes32(0) || outClaim == bytes32(0)) revert EmptyCommitment();
+        h = _hopRecs[msg.sender];
+        if (h.status == Status.Unregistered) revert NotRegisteredHop();
+        if (h.status != Status.Active) revert HopNotActive();
+        if (_att[sid][msg.sender].attestor != address(0)) revert AlreadyAttested();
+        if (_carrierAttested[sid][h.carrierId]) revert CarrierAlreadyAttested();
+        if (_attesters[sid].length >= MAX_HOPS) revert TooManyAttestations();
+    }
+
+    function _emitAttested(bytes32 sid, uint8 hop, bytes32 carrierId, bytes32 inClaim, bytes32 outClaim, uint8 codec)
+        private
+    {
+        emit Attested(sid, hop, msg.sender, carrierId, inClaim, outClaim, codec);
+    }
+
     // ───────────────────────────────── anchors ─────────────────────────────────
 
     /// Anchor carries (did, sid, root, ptr, T, |Q|); only the organisation's
@@ -335,6 +382,10 @@ contract BVIRegistry is IBVIRegistry {
             out[j] = cur;
         }
         return out;
+    }
+
+    function getLinks(bytes32 sid, address attester) external view override returns (Links memory) {
+        return _links[sid][attester];
     }
 
     function attestationCount(bytes32 sid) external view override returns (uint256) {
